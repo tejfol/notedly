@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-let db;
-export default db = {
+
+export default {
   connect: DB_HOST => {
     // Use the Mongo driver's updated URL string parser
     mongoose.set('useNewUrlParser', true);

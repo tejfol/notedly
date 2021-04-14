@@ -4,9 +4,9 @@ import { ApolloServer } from 'apollo-server-express';
 dotenv.config({ silent: process.env.NODE_ENV === 'production' });
 
 import db from './db.js';
-import models from './models/index.js';
+import { models } from './models/index.js';
 import typeDefs from './schema.js';
-import resolvers from './resolvers/index.js';
+import {resolvers} from './resolvers/index.js';
 import jwt from 'jsonwebtoken';
 
 const port = process.env.PORT || 4000;
