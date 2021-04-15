@@ -1,6 +1,5 @@
-## The "notedly" project from the book **JavaScript Everywhere**
+## The "notedly" API
 
 - JavaScript
 - MongoDB
-- React
 - Apollo GraphQL
