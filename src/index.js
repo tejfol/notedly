@@ -1,18 +1,27 @@
 import express from 'express';
 import dotenv from 'dotenv';
+
 import { ApolloServer } from 'apollo-server-express';
+import depthLimit from 'graphql-depth-limit';
+import { createComplexityLimitRule } from 'graphql-validation-complexity';
+
 dotenv.config({ silent: process.env.NODE_ENV === 'production' });
 
 import db from './db.js';
 import { models } from './models/index.js';
 import typeDefs from './schema.js';
-import {resolvers} from './resolvers/index.js';
+import { resolvers } from './resolvers/index.js';
 import jwt from 'jsonwebtoken';
+
+import helmet from 'helmet';
+import cors from 'cors';
 
 const port = process.env.PORT || 4000;
 const DB_HOST = process.env.DB_HOST;
 
 const app = express();
+app.use(helmet());
+app.use(cors());
 
 db.connect(DB_HOST);
 
@@ -32,6 +41,7 @@ const getUser = token => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  validationRules: [depthLimit(5), createComplexityLimitRule(1000)],
   context: ({ req }) => {
     // get the user token from the headers
     const token = req.headers.authorization;

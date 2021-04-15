@@ -37,7 +37,13 @@ export default gql`
     user(username: String!): User
     users: [User!]!
     me: User!
+    noteFeed(cursor: String): NoteFeed
   }
 
+  type NoteFeed {
+    notes: [Note]!
+    cursor: String!
+    hasNextPage: Boolean!
+  }
   
 `;
