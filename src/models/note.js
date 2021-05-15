@@ -1,11 +1,13 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
+// Define the note's database schema
 const noteSchema = new mongoose.Schema(
   {
     content: {
       type: String,
       required: true
     },
+    // reference the author's object ID
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -13,7 +15,6 @@ const noteSchema = new mongoose.Schema(
     },
     favoriteCount: {
       type: Number,
-      required: true,
       default: 0
     },
     favoritedBy: [
@@ -23,13 +24,11 @@ const noteSchema = new mongoose.Schema(
       }
     ]
   },
-
   {
-    //Assigns createdAt and updtedAt fields with a Data type
+    // Assigns createdAt and updatedAt fields with a Date type
     timestamps: true
   }
 );
 
-const Note = mongoose.model('Note', noteSchema);
-
-export default Note;
+// Define the 'Note' model with the schema
+export const Note = mongoose.model('Note', noteSchema);
